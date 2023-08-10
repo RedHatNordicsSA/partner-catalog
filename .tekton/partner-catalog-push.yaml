@@ -313,12 +313,10 @@ spec:
                     key: rox_central_endpoint
             script: |
               #!/usr/bin/env bash
-              echo "ROX_CENTRAL_ENDPOINT: " + $ROX_CENTRAL_ENDPOINT
-              echo "ROX_API_TOKEN: " + $ROX_API_TOKEN
               jq --version
               echo "is jq here?"
               echo "Getting roxctl"
-              curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_CENTRAL_ENDPOINT/api/cli/download/roxctl-linux-amd64 --output ./roxctl
+              curl -k -L --http1.1 -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_CENTRAL_ENDPOINT/api/cli/download/roxctl-linux-amd64 --output ./roxctl
               chmod +x ./roxctl
               echo "## Scanning image $(params.image)@$(params.image_digest)"
               ./roxctl image scan --insecure-skip-tls-verify -e $ROX_CENTRAL_ENDPOINT --image $(params.image)@$(params.image_digest) --output json  > roxctl_output.json
