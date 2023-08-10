@@ -25,4 +25,3 @@ curl localhost:8080
 Aloha Spring 1 2-05-2023 11:46:16 on unknown
 ```
 
-FOO
